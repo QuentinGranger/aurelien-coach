@@ -34,6 +34,10 @@
   padding: 0 $spacing-lg;
   box-sizing: border-box;
   
+  @include respond-to(lg) {
+    padding: 0 $spacing-xl;
+  }
+  
   @include respond-to(md) {
     padding: 0 $spacing-lg;
   }
@@ -47,10 +51,6 @@
     padding: 0 $spacing-sm;
     margin: 0;
     width: 100%;
-  }
-  
-  @include respond-to(lg) {
-    padding: 0 $spacing-xl;
   }
 }
 
