@@ -1,0 +1,196 @@
+// ===================================
+// PREMIUM CROSSFIT COACH - TYPOGRAPHY
+// ===================================
+
+// Headings
+h1, .h1 {
+  @include heading-display;
+  font-size: $font-size-5xl;
+  margin-bottom: $spacing-lg;
+  
+  @include respond-to(md) {
+    margin-bottom: $spacing-xl;
+  }
+}
+
+h2, .h2 {
+  @include heading-display;
+  font-size: $font-size-4xl;
+  margin-bottom: $spacing-md;
+  
+  @include respond-to(md) {
+    margin-bottom: $spacing-lg;
+  }
+}
+
+h3, .h3 {
+  @include heading-primary;
+  font-size: $font-size-3xl;
+  margin-bottom: $spacing-md;
+}
+
+h4, .h4 {
+  @include heading-primary;
+  font-size: $font-size-2xl;
+  margin-bottom: $spacing-sm;
+}
+
+h5, .h5 {
+  @include heading-primary;
+  font-size: $font-size-xl;
+  margin-bottom: $spacing-sm;
+}
+
+h6, .h6 {
+  @include heading-primary;
+  font-size: $font-size-lg;
+  margin-bottom: $spacing-sm;
+}
+
+// Body text
+p {
+  @include text-body;
+  font-size: $font-size-base;
+  margin-bottom: $spacing-md;
+  color: rgba($color-white, 0.9);
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Lead text
+.lead {
+  @include text-body;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  color: rgba($color-white, 0.95);
+  margin-bottom: $spacing-lg;
+}
+
+// Small text
+small, .small {
+  @include text-small;
+  color: rgba($color-white, 0.7);
+}
+
+// Text utilities
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.text-uppercase { text-transform: uppercase; }
+.text-lowercase { text-transform: lowercase; }
+.text-capitalize { text-transform: capitalize; }
+
+.font-light { font-weight: $font-weight-light; }
+.font-regular { font-weight: $font-weight-regular; }
+.font-medium { font-weight: $font-weight-medium; }
+.font-semibold { font-weight: $font-weight-semibold; }
+.font-bold { font-weight: $font-weight-bold; }
+
+// Premium text effects
+.text-gradient {
+  @include text-gradient;
+}
+
+.text-glow {
+  @include text-glow;
+}
+
+.text-gold {
+  color: $color-gold;
+}
+
+.text-copper {
+  color: $color-copper;
+}
+
+// Display text for hero sections
+.display-1 {
+  @include heading-display;
+  font-size: clamp(3rem, 8vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  font-weight: $font-weight-bold;
+}
+
+.display-2 {
+  @include heading-display;
+  font-size: clamp(2.5rem, 6vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-weight: $font-weight-bold;
+}
+
+// Quote styling
+blockquote {
+  position: relative;
+  padding: $spacing-lg $spacing-xl;
+  margin: $spacing-xl 0;
+  font-style: italic;
+  font-size: $font-size-lg;
+  color: rgba($color-white, 0.9);
+  border-left: 4px solid $color-gold;
+  background: rgba($color-anthracite, 0.3);
+  
+  &::before {
+    content: '"';
+    position: absolute;
+    top: 0;
+    left: $spacing-md;
+    font-size: 4rem;
+    color: $color-gold;
+    line-height: 1;
+    opacity: 0.5;
+  }
+  
+  cite {
+    display: block;
+    margin-top: $spacing-md;
+    font-size: $font-size-sm;
+    font-style: normal;
+    color: $color-gold;
+    
+    &::before {
+      content: '— ';
+    }
+  }
+}
+
+// Links
+a {
+  color: $color-gold;
+  transition: color $transition-fast;
+  
+  &:hover {
+    color: $color-gold-light;
+  }
+  
+  &:focus {
+    outline-color: $color-gold;
+  }
+}
+
+// Code
+code {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.9em;
+  background: rgba($color-anthracite, 0.6);
+  padding: 0.2em 0.4em;
+  border-radius: $border-radius-sm;
+  color: $color-gold-light;
+}
+
+pre {
+  background: rgba($color-anthracite, 0.8);
+  padding: $spacing-md;
+  border-radius: $border-radius-base;
+  overflow-x: auto;
+  margin: $spacing-md 0;
+  
+  code {
+    background: none;
+    padding: 0;
+  }
+}

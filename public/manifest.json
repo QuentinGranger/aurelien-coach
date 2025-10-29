@@ -1,0 +1,111 @@
+{
+  "name": "Aurélien MAZEL - Coach CrossFit Paris | CF-L2 Certified",
+  "short_name": "Aurélien Coach",
+  "description": "🏆 Coach CrossFit certifié CF-L2 à Paris. Transformation physique garantie avec Aurélien MAZEL. 500+ athlètes transformés depuis 2018.",
+  "start_url": "/?utm_source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "background_color": "#0a0a0a",
+  "theme_color": "#d4af37",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/desktop-home.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "Accueil - Coach CrossFit Paris"
+    },
+    {
+      "src": "/screenshots/mobile-programs.jpg",
+      "sizes": "390x844",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "Programmes CrossFit"
+    }
+  ],
+  "categories": ["fitness", "sports", "health", "lifestyle"],
+  "lang": "fr",
+  "dir": "ltr",
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "Mes Programmes",
+      "short_name": "Programmes",
+      "description": "Découvrir les programmes CrossFit",
+      "url": "/#programs",
+      "icons": [
+        {
+          "src": "/icons/programs-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Me Contacter",
+      "short_name": "Contact",
+      "description": "Prendre contact avec Aurélien",
+      "url": "/#contact",
+      "icons": [
+        {
+          "src": "/icons/contact-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "La Box",
+      "short_name": "Box",
+      "description": "Découvrir CrossFit Louvre III",
+      "url": "/#box",
+      "icons": [
+        {
+          "src": "/icons/box-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://aurelien-coach.fr/manifest.json"
+    }
+  ]
+}

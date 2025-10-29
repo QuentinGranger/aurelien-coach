@@ -1,0 +1,49 @@
+// ===================================
+// PREMIUM CROSSFIT COACH - FUNCTIONS
+// ===================================
+
+// Convert px to rem
+@function rem($pixels, $base: 16) {
+  @return #{$pixels / $base}rem;
+}
+
+// Convert px to em
+@function em($pixels, $base: 16) {
+  @return #{$pixels / $base}em;
+}
+
+// Strip units from a number
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+  @return $number;
+}
+
+// Calculate fluid typography
+@function fluid-size($min-size, $max-size, $min-width: 320px, $max-width: 1200px) {
+  $min-size: strip-unit($min-size);
+  $max-size: strip-unit($max-size);
+  $min-width: strip-unit($min-width);
+  $max-width: strip-unit($max-width);
+  
+  $slope: ($max-size - $min-size) / ($max-width - $min-width);
+  $y-axis-intersection: -$min-width * $slope + $min-size;
+  
+  @return clamp(#{$min-size}px, #{$y-axis-intersection}px + #{$slope * 100}vw, #{$max-size}px);
+}
+
+// Lighten color
+@function lighten-color($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+// Darken color
+@function darken-color($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+// Alpha transparency
+@function alpha($color, $opacity) {
+  @return rgba($color, $opacity);
+}

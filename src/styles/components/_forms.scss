@@ -1,0 +1,325 @@
+// ===================================
+// PREMIUM CROSSFIT COACH - FORMS
+// ===================================
+
+// Form container
+.form {
+  width: 100%;
+  
+  &--centered {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+// Form groups
+.form-group {
+  margin-bottom: $spacing-lg;
+  
+  &--inline {
+    @include flex-center;
+    gap: $spacing-md;
+    
+    .form-label {
+      margin-bottom: 0;
+      white-space: nowrap;
+    }
+  }
+}
+
+// Labels
+.form-label {
+  display: block;
+  font-weight: $font-weight-medium;
+  color: $color-white;
+  margin-bottom: $spacing-sm;
+  font-size: $font-size-sm;
+  
+  &--required::after {
+    content: ' *';
+    color: $color-red-accent;
+  }
+}
+
+// Input base styles
+.form-input {
+  width: 100%;
+  padding: $spacing-md $spacing-lg;
+  background: rgba($color-anthracite, 0.8);
+  border: 1px solid rgba($color-white, 0.2);
+  border-radius: $border-radius-base;
+  color: $color-white;
+  font-size: $font-size-base;
+  transition: all $transition-base;
+  min-height: $input-height-base;
+  
+  &::placeholder {
+    color: rgba($color-white, 0.5);
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: $color-gold;
+    box-shadow: 0 0 0 3px rgba($color-gold, 0.1);
+    background: rgba($color-anthracite, 0.9);
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  &--error {
+    border-color: $color-red-accent;
+    
+    &:focus {
+      border-color: $color-red-accent;
+      box-shadow: 0 0 0 3px rgba($color-red-accent, 0.1);
+    }
+  }
+  
+  &--success {
+    border-color: #10b981;
+    
+    &:focus {
+      border-color: #10b981;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    }
+  }
+  
+  // Sizes
+  &--sm {
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+    min-height: $input-height-sm;
+  }
+  
+  &--lg {
+    padding: $spacing-lg $spacing-xl;
+    font-size: $font-size-lg;
+    min-height: $input-height-lg;
+  }
+}
+
+// Textarea
+.form-textarea {
+  @extend .form-input;
+  min-height: 120px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+// Select
+.form-select {
+  @extend .form-input;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right $spacing-md center;
+  background-repeat: no-repeat;
+  background-size: 16px 12px;
+  padding-right: $spacing-3xl;
+  
+  &:focus {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23d4af37' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  }
+}
+
+// Checkbox and Radio
+.form-check {
+  @include flex-center;
+  justify-content: flex-start;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-md;
+  
+  &-input {
+    width: 18px;
+    height: 18px;
+    background: rgba($color-anthracite, 0.8);
+    border: 1px solid rgba($color-white, 0.2);
+    border-radius: $border-radius-sm;
+    cursor: pointer;
+    position: relative;
+    
+    &:checked {
+      background: $color-gold;
+      border-color: $color-gold;
+      
+      &::after {
+        content: '✓';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: $color-primary-black;
+        font-size: 12px;
+        font-weight: bold;
+      }
+    }
+    
+    &[type="radio"] {
+      border-radius: $border-radius-full;
+      
+      &:checked::after {
+        content: '';
+        width: 8px;
+        height: 8px;
+        background: $color-primary-black;
+        border-radius: $border-radius-full;
+      }
+    }
+  }
+  
+  &-label {
+    color: rgba($color-white, 0.9);
+    cursor: pointer;
+    font-size: $font-size-sm;
+  }
+}
+
+// Input groups
+.input-group {
+  position: relative;
+  display: flex;
+  
+  &__prepend,
+  &__append {
+    @include flex-center;
+    padding: 0 $spacing-md;
+    background: rgba($color-anthracite, 0.6);
+    border: 1px solid rgba($color-white, 0.2);
+    color: rgba($color-white, 0.7);
+    font-size: $font-size-sm;
+  }
+  
+  &__prepend {
+    border-right: none;
+    border-radius: $border-radius-base 0 0 $border-radius-base;
+  }
+  
+  &__append {
+    border-left: none;
+    border-radius: 0 $border-radius-base $border-radius-base 0;
+  }
+  
+  .form-input {
+    border-radius: 0;
+    
+    &:first-child {
+      border-radius: $border-radius-base 0 0 $border-radius-base;
+    }
+    
+    &:last-child {
+      border-radius: 0 $border-radius-base $border-radius-base 0;
+    }
+    
+    &:only-child {
+      border-radius: $border-radius-base;
+    }
+  }
+}
+
+// Floating labels
+.form-floating {
+  position: relative;
+  
+  .form-input {
+    padding-top: $spacing-lg;
+    
+    &:focus,
+    &:not(:placeholder-shown) {
+      ~ .form-label {
+        transform: translateY(-50%) scale(0.85);
+        color: $color-gold;
+      }
+    }
+  }
+  
+  .form-label {
+    position: absolute;
+    top: 50%;
+    left: $spacing-lg;
+    transform: translateY(-50%);
+    background: rgba($color-anthracite, 0.8);
+    padding: 0 $spacing-xs;
+    transition: all $transition-base;
+    pointer-events: none;
+    margin-bottom: 0;
+  }
+}
+
+// Error messages
+.form-error {
+  display: block;
+  margin-top: $spacing-xs;
+  font-size: $font-size-sm;
+  color: $color-red-accent;
+}
+
+// Help text
+.form-help {
+  display: block;
+  margin-top: $spacing-xs;
+  font-size: $font-size-sm;
+  color: rgba($color-white, 0.6);
+}
+
+// Form actions
+.form-actions {
+  @include flex-center;
+  gap: $spacing-md;
+  margin-top: $spacing-xl;
+  
+  &--center {
+    justify-content: center;
+  }
+  
+  &--end {
+    justify-content: flex-end;
+  }
+  
+  &--full {
+    .btn {
+      flex: 1;
+    }
+  }
+}
+
+// Contact form specific
+.contact-form {
+  @include card-premium;
+  padding: $spacing-2xl;
+  
+  &__title {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+    color: $color-white;
+  }
+  
+  &__subtitle {
+    text-align: center;
+    color: rgba($color-white, 0.7);
+    margin-bottom: $spacing-2xl;
+  }
+}
+
+// Newsletter form
+.newsletter-form {
+  @include flex-center;
+  gap: $spacing-md;
+  max-width: 400px;
+  margin: 0 auto;
+  
+  .form-input {
+    flex: 1;
+    margin-bottom: 0;
+  }
+  
+  @media (max-width: #{$breakpoint-sm - 1px}) {
+    flex-direction: column;
+    
+    .form-input,
+    .btn {
+      width: 100%;
+    }
+  }
+}

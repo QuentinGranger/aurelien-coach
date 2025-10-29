@@ -1,0 +1,147 @@
+// ===================================
+// PREMIUM CROSSFIT COACH - VARIABLES
+// ===================================
+
+// Colors - Premium Dark Theme
+// ===================================
+$color-primary-black: #0a0a0a;
+$color-secondary-black: #1a1a1a;
+$color-anthracite: #2c2c2c;
+$color-anthracite-light: #3a3a3a;
+
+$color-white: #ffffff;
+$color-white-soft: #f8f8f8;
+$color-gray-light: #cccccc;
+$color-gray-medium: #888888;
+
+// Premium Accents
+$color-gold: #d4af37;
+$color-gold-light: #e6c757;
+$color-copper: #b87333;
+$color-bronze: #cd7f32;
+$color-amber: #ffbf00;
+
+// Secondary Colors
+$color-bordeaux: #722f37;
+$color-olive: #556b2f;
+$color-red-accent: #dc2626;
+
+// Gradients
+$gradient-gold: linear-gradient(135deg, $color-gold 0%, $color-copper 100%);
+$gradient-dark: linear-gradient(135deg, $color-primary-black 0%, $color-anthracite 100%);
+$gradient-overlay: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4));
+
+// Typography
+// ===================================
+$font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-display: 'Monument Extended', 'Inter', sans-serif; // Fallback to Inter
+
+// Font Weights
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Font Sizes - Fluid Typography
+$font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+$font-size-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+$font-size-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+$font-size-lg: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
+$font-size-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+$font-size-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+$font-size-3xl: clamp(2rem, 1.7rem + 1.5vw, 3rem);
+$font-size-4xl: clamp(3rem, 2.5rem + 2.5vw, 4rem);
+$font-size-5xl: clamp(4rem, 3rem + 5vw, 6rem);
+
+// Line Heights
+$line-height-tight: 1.1;
+$line-height-normal: 1.4;
+$line-height-relaxed: 1.6;
+
+// Spacing System
+// ===================================
+$spacing-xs: 0.25rem;   // 4px
+$spacing-sm: 0.5rem;    // 8px
+$spacing-md: 1rem;      // 16px
+$spacing-lg: 1.5rem;    // 24px
+$spacing-xl: 2rem;      // 32px
+$spacing-2xl: 3rem;     // 48px
+$spacing-3xl: 4rem;     // 64px
+$spacing-4xl: 6rem;     // 96px
+$spacing-5xl: 8rem;     // 128px
+
+// Container Sizes
+$container-xs: 480px;
+$container-sm: 640px;
+$container-md: 768px;
+$container-lg: 1024px;
+$container-xl: 1280px;
+$container-2xl: 1536px;
+
+// Breakpoints
+// ===================================
+$breakpoint-xs: 480px;
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// Z-Index Scale
+// ===================================
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;
+$z-index-mobile-menu: 9999;
+$z-index-mobile-toggle: 10000;
+
+// Transitions & Animations
+// ===================================
+$transition-fast: 0.15s ease-out;
+$transition-base: 0.3s ease-out;
+$transition-slow: 0.5s ease-out;
+$transition-bounce: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+// Cubic Bezier Curves
+$ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+$ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$ease-in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+$ease-premium: cubic-bezier(0.4, 0, 0.2, 1);
+
+// Border Radius
+// ===================================
+$border-radius-sm: 0.25rem;
+$border-radius-base: 0.5rem;
+$border-radius-lg: 1rem;
+$border-radius-xl: 1.5rem;
+$border-radius-full: 9999px;
+
+// Shadows - Premium Effects
+// ===================================
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-base: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+$shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+$shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.25);
+$shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+
+// Premium Glows
+$glow-gold: 0 0 20px rgba(212, 175, 55, 0.3);
+$glow-copper: 0 0 20px rgba(184, 115, 51, 0.3);
+$glow-white: 0 0 20px rgba(255, 255, 255, 0.1);
+
+// Component Specific
+// ===================================
+$button-height-sm: 2.5rem;
+$button-height-base: 3rem;
+$button-height-lg: 3.5rem;
+$button-height-xl: 4rem;
+
+$input-height-sm: 2.5rem;
+$input-height-base: 3rem;
+$input-height-lg: 3.5rem;

@@ -1,0 +1,21 @@
+// Import Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+// Import our SCSS architecture (using @import for compatibility)
+@import './abstracts/variables';
+@import './abstracts/mixins';
+@import './abstracts/functions';
+@import './base/reset';
+@import './base/typography';
+@import './base/base';
+@import './layout/grid';
+@import './layout/header';
+@import './layout/footer';
+@import './components/buttons';
+@import './components/cards';
+@import './components/forms';
+@import './components/modal';
+@import './components/legal-modal';
+@import './components/animations';
+@import './pages/home';
+@import './pages/not-found';

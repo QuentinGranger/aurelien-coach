@@ -1,0 +1,572 @@
+// ===================================
+// PREMIUM CROSSFIT COACH - CARDS
+// ===================================
+
+// Base card
+.card {
+  @include card-base;
+  padding: $spacing-xl;
+  transition: all $transition-base;
+  
+  &--premium {
+    @include card-premium;
+  }
+  
+  &--glass {
+    background: rgba($color-white, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba($color-white, 0.1);
+  }
+  
+  &--dark {
+    background: rgba($color-anthracite, 0.9);
+    border: 1px solid rgba($color-white, 0.05);
+  }
+}
+
+// Program cards
+.program-card {
+  @include card-premium;
+  padding: 0;
+  overflow: visible;
+  cursor: pointer;
+  border-radius: $border-radius-xl;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 500px;
+  transition: all $transition-base;
+  
+  &__image {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform $transition-slow;
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba($color-gold, 0.2) 0%, rgba($color-primary-black, 0.7) 100%);
+    }
+  }
+  
+  &__content {
+    padding: $spacing-2xl;
+    position: relative;
+    background: linear-gradient(135deg, rgba($color-secondary-black, 0.95) 0%, rgba($color-primary-black, 0.98) 100%);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+  }
+  
+  &__title {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-md;
+    @include text-gradient;
+    line-height: 1.2;
+  }
+  
+  &__description {
+    color: rgba($color-white, 0.9);
+    margin-bottom: $spacing-xl;
+    line-height: $line-height-relaxed;
+    font-size: $font-size-base;
+    @include line-clamp(3);
+    min-height: calc(#{$line-height-relaxed} * 3em);
+  }
+  
+  // When expanded, remove line clamp
+  &.expanded &__description {
+    @include line-clamp(none);
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    overflow: visible;
+  }
+  
+  &__meta {
+    @include flex-between;
+    margin-bottom: auto;
+    gap: $spacing-md;
+    padding-bottom: $spacing-lg;
+    
+    span {
+      background: rgba($color-gold, 0.1);
+      color: $color-gold;
+      padding: $spacing-xs $spacing-sm;
+      border-radius: $border-radius-base;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-medium;
+      border: 1px solid rgba($color-gold, 0.2);
+    }
+  }
+  
+  &__details {
+    margin-bottom: $spacing-xl;
+    padding: $spacing-lg;
+    background: rgba($color-anthracite, 0.95);
+    border-radius: $border-radius-lg;
+    border-left: 4px solid $color-gold;
+    box-shadow: $shadow-lg;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba($color-gold, 0.2);
+    position: relative;
+  }
+  
+  &__close {
+    position: absolute;
+    top: $spacing-sm;
+    right: $spacing-sm;
+  }
+  
+  &__close-btn {
+    width: 32px;
+    height: 32px;
+    background: rgba($color-white, 0.1);
+    border: none;
+    border-radius: $border-radius-base;
+    color: rgba($color-white, 0.7);
+    cursor: pointer;
+    @include flex-center;
+    transition: all $transition-fast;
+    
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+    
+    &:hover {
+      background: rgba($color-gold, 0.2);
+      color: $color-gold;
+      transform: scale(1.1);
+    }
+  }
+  
+  &__reduce {
+    width: 100%;
+    margin-top: $spacing-md;
+    padding: $spacing-sm;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-regular;
+    background: transparent;
+    border: none;
+    color: rgba($color-white, 0.6);
+    cursor: pointer;
+    transition: all $transition-fast;
+    @include flex-center;
+    gap: $spacing-xs;
+    
+    &:hover {
+      color: $color-gold;
+      transform: translateY(-1px);
+    }
+  }
+  
+  &__info {
+    margin-bottom: $spacing-lg;
+    
+    p {
+      margin-bottom: $spacing-sm;
+      color: rgba($color-white, 0.9);
+      font-size: $font-size-sm;
+      
+      strong {
+        color: $color-gold;
+        font-weight: $font-weight-semibold;
+      }
+    }
+  }
+  
+  &__features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    li {
+      position: relative;
+      padding-left: $spacing-lg;
+      margin-bottom: $spacing-sm;
+      color: rgba($color-white, 0.8);
+      font-size: $font-size-sm;
+      line-height: $line-height-relaxed;
+      
+      &::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: $color-gold;
+        font-weight: $font-weight-bold;
+      }
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  
+  &__cta {
+    width: 100%;
+    padding: $spacing-lg $spacing-xl;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    border-radius: $border-radius-lg;
+    transition: all $transition-base;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    
+    &.btn--primary {
+      background: $gradient-gold;
+      color: $color-primary-black;
+      border: none;
+      box-shadow: $shadow-lg;
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: $shadow-xl;
+      }
+    }
+    
+    &.btn--secondary {
+      background: transparent;
+      color: $color-white;
+      border: 2px solid rgba($color-white, 0.2);
+      
+      &:hover {
+        border-color: $color-gold;
+        color: $color-gold;
+        background: rgba($color-gold, 0.1);
+      }
+    }
+  }
+  
+  &:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 40px rgba($color-gold, 0.1);
+    z-index: 5;
+    
+    .program-card__image img {
+      transform: scale(1.05);
+    }
+  }
+  
+  // When expanded, ensure it's above other cards
+  &.expanded {
+    z-index: 15;
+  }
+}
+
+// SEO Image component
+.seo-image {
+  position: relative;
+  margin: 0;
+  
+  &__img {
+    transition: opacity 0.3s ease, filter 0.3s ease;
+  }
+  
+  &.loading &__img {
+    opacity: 0.8;
+    filter: blur(2px);
+  }
+  
+  &.loaded &__img {
+    opacity: 1;
+    filter: blur(0);
+  }
+  
+  &__caption {
+    @include text-small;
+    color: rgba($color-white, 0.7);
+    text-align: center;
+    margin-top: $spacing-sm;
+    font-style: italic;
+  }
+}
+
+// Testimonial cards
+.testimonial-card {
+  @include card-base;
+  padding: $spacing-2xl;
+  text-align: center;
+  position: relative;
+  
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    &::after {
+      content: '← Swipe →';
+      position: absolute;
+      bottom: $spacing-sm;
+      right: $spacing-sm;
+      font-size: $font-size-xs;
+      color: rgba($color-white, 0.4);
+      opacity: 0.7;
+      animation: fadeInOut 3s infinite;
+    }
+  }
+  
+  @keyframes fadeInOut {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+  }
+  
+  &::before {
+    content: '"';
+    position: absolute;
+    top: $spacing-lg;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 4rem;
+    color: $color-gold;
+    opacity: 0.3;
+    line-height: 1;
+  }
+  
+  &__quote {
+    font-size: $font-size-lg;
+    font-style: italic;
+    color: rgba($color-white, 0.9);
+    margin-bottom: $spacing-xl;
+    position: relative;
+    z-index: 2;
+  }
+  
+  &__author {
+    @include flex-column-center;
+    gap: $spacing-md;
+  }
+  
+  &__avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: $border-radius-full;
+    border: 2px solid $color-gold;
+    object-fit: cover;
+  }
+  
+  &__name {
+    font-weight: $font-weight-semibold;
+    color: $color-white;
+    margin-bottom: $spacing-xs;
+  }
+  
+  &__role {
+    font-size: $font-size-sm;
+    color: $color-gold;
+  }
+  
+  &__metrics {
+    @include flex-center;
+    gap: $spacing-lg;
+    margin-top: $spacing-lg;
+    padding-top: $spacing-lg;
+    border-top: 1px solid rgba($color-white, 0.1);
+  }
+  
+  &__metric {
+    text-align: center;
+    
+    &-value {
+      display: block;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+      color: $color-gold;
+    }
+    
+    &-label {
+      font-size: $font-size-xs;
+      color: rgba($color-white, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  }
+}
+
+// Feature cards
+.feature-card {
+  @include card-base;
+  padding: $spacing-2xl;
+  text-align: center;
+  position: relative;
+  
+  &__icon {
+    @include flex-center;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto $spacing-lg;
+    background: $gradient-gold;
+    border-radius: $border-radius-full;
+    color: $color-primary-black;
+    
+    svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-md;
+    color: $color-white;
+  }
+  
+  &__description {
+    color: rgba($color-white, 0.8);
+    line-height: $line-height-relaxed;
+  }
+  
+  &:hover {
+    @include hover-lift;
+    
+    .feature-card__icon {
+      box-shadow: $glow-gold;
+    }
+  }
+}
+
+// Stats cards
+.stats-card {
+  @include card-premium;
+  padding: 0;
+  overflow: hidden;
+  border-radius: $border-radius-xl;
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  transition: all $transition-base;
+  
+  &__header {
+    position: relative;
+    height: 80px;
+    background: linear-gradient(135deg, rgba($color-gold, 0.2) 0%, rgba($color-primary-black, 0.7) 100%);
+    @include flex-center;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba($color-gold, 0.1) 0%, transparent 50%);
+    }
+  }
+  
+  &__content {
+    padding: $spacing-xl;
+    background: linear-gradient(135deg, rgba($color-secondary-black, 0.95) 0%, rgba($color-primary-black, 0.98) 100%);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  &__number {
+    display: block;
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-bold;
+    @include text-gradient;
+    margin-bottom: $spacing-sm;
+    line-height: 1;
+  }
+  
+  &__label {
+    font-size: $font-size-lg;
+    color: $color-white;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $spacing-xs;
+  }
+  
+  &__description {
+    font-size: $font-size-sm;
+    color: rgba($color-white, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba($color-gold, 0.1);
+  }
+}
+
+// Coach card
+.coach-card {
+  @include card-premium;
+  padding: 0;
+  overflow: hidden;
+  
+  &__image {
+    position: relative;
+    height: 300px;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(transparent, rgba($color-primary-black, 0.8));
+    }
+  }
+  
+  &__content {
+    padding: $spacing-xl;
+  }
+  
+  &__name {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-sm;
+    color: $color-white;
+  }
+  
+  &__title {
+    font-size: $font-size-lg;
+    color: $color-gold;
+    margin-bottom: $spacing-lg;
+  }
+  
+  &__bio {
+    color: rgba($color-white, 0.8);
+    margin-bottom: $spacing-lg;
+    line-height: $line-height-relaxed;
+  }
+  
+  &__credentials {
+    @include flex-column;
+    gap: $spacing-sm;
+    
+    &-item {
+      @include flex-center;
+      justify-content: flex-start;
+      gap: $spacing-sm;
+      font-size: $font-size-sm;
+      color: rgba($color-white, 0.7);
+      
+      &::before {
+        content: '✓';
+        color: $color-gold;
+        font-weight: $font-weight-bold;
+      }
+    }
+  }
+}

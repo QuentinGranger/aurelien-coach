@@ -1,0 +1,227 @@
+// ===================================
+// PREMIUM CROSSFIT COACH - MODAL
+// ===================================
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba($color-primary-black, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: $z-index-modal-backdrop;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-lg;
+  z-index: $z-index-modal;
+  
+  > div {
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    background: linear-gradient(135deg, rgba($color-secondary-black, 0.98) 0%, rgba($color-primary-black, 0.95) 100%);
+    border-radius: $border-radius-xl;
+    box-shadow: $shadow-2xl;
+    border: 1px solid rgba($color-gold, 0.2);
+    overflow: hidden;
+  }
+  
+  @media (max-width: #{$breakpoint-sm - 1px}) {
+    width: 95%;
+    max-height: 95vh;
+  }
+  
+  &__header {
+    padding: $spacing-2xl $spacing-2xl $spacing-lg;
+    border-bottom: 1px solid rgba($color-white, 0.1);
+    position: relative;
+    
+    h2 {
+      @include text-gradient;
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-bold;
+      margin-bottom: $spacing-sm;
+      line-height: 1.2;
+    }
+    
+    @media (max-width: #{$breakpoint-sm - 1px}) {
+      padding: $spacing-xl $spacing-lg $spacing-md;
+      
+      h2 {
+        font-size: $font-size-xl;
+      }
+    }
+  }
+  
+  &__program {
+    color: rgba($color-white, 0.8);
+    font-size: $font-size-sm;
+    margin: 0;
+    
+    span {
+      color: $color-gold;
+      font-weight: $font-weight-semibold;
+    }
+  }
+  
+  &__close {
+    position: absolute;
+    top: $spacing-lg;
+    right: $spacing-lg;
+    width: 40px;
+    height: 40px;
+    background: rgba($color-white, 0.1);
+    border: none;
+    border-radius: $border-radius-base;
+    color: rgba($color-white, 0.7);
+    cursor: pointer;
+    @include flex-center;
+    transition: all $transition-fast;
+    
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+    
+    &:hover {
+      background: rgba($color-gold, 0.2);
+      color: $color-gold;
+      transform: scale(1.1);
+    }
+    
+    @media (max-width: #{$breakpoint-sm - 1px}) {
+      top: $spacing-md;
+      right: $spacing-md;
+      width: 36px;
+      height: 36px;
+      
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+  
+  &__form {
+    padding: $spacing-lg $spacing-2xl $spacing-2xl;
+    max-height: calc(90vh - 120px);
+    overflow-y: auto;
+    
+    @media (max-width: #{$breakpoint-sm - 1px}) {
+      padding: $spacing-md $spacing-lg $spacing-xl;
+    }
+  }
+  
+  &__actions {
+    @include flex-center;
+    gap: $spacing-md;
+    margin-top: $spacing-xl;
+    padding-top: $spacing-lg;
+    border-top: 1px solid rgba($color-white, 0.1);
+    
+    @media (max-width: #{$breakpoint-sm - 1px}) {
+      flex-direction: column;
+      gap: $spacing-sm;
+      
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+}
+
+// Form styles for modal
+.modal .form-group {
+  margin-bottom: $spacing-lg;
+  
+  label {
+    display: block;
+    font-weight: $font-weight-semibold;
+    color: $color-white;
+    margin-bottom: $spacing-sm;
+    font-size: $font-size-sm;
+  }
+  
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: $spacing-md;
+    background: rgba($color-anthracite, 0.5);
+    border: 2px solid rgba($color-white, 0.1);
+    border-radius: $border-radius-base;
+    color: $color-white;
+    font-size: $font-size-base;
+    transition: all $transition-fast;
+    
+    &::placeholder {
+      color: rgba($color-white, 0.5);
+    }
+    
+    &:focus {
+      outline: none;
+      border-color: $color-gold;
+      background: rgba($color-anthracite, 0.7);
+      box-shadow: 0 0 0 3px rgba($color-gold, 0.1);
+    }
+    
+    &:invalid {
+      border-color: #ff6b6b;
+    }
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+  }
+  
+  select {
+    cursor: pointer;
+    
+    option {
+      background: $color-anthracite;
+      color: $color-white;
+    }
+  }
+}
+
+// Required field indicator
+.modal .form-group label::after {
+  content: '';
+}
+
+.modal .form-group:has(input[required]) label::after,
+.modal .form-group:has(textarea[required]) label::after {
+  content: ' *';
+  color: $color-gold;
+}
+
+// Custom scrollbar for modal content
+.modal__form::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal__form::-webkit-scrollbar-track {
+  background: rgba($color-white, 0.1);
+  border-radius: 3px;
+}
+
+.modal__form::-webkit-scrollbar-thumb {
+  background: rgba($color-gold, 0.5);
+  border-radius: 3px;
+  
+  &:hover {
+    background: rgba($color-gold, 0.7);
+  }
+}

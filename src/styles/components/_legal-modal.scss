@@ -1,0 +1,312 @@
+// ===================================
+// LEGAL MODAL
+// ===================================
+
+.legal-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba($color-primary-black, 0.9);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  @include flex-center;
+  padding: $spacing-lg;
+  overflow-y: auto;
+
+  &__content {
+    background: $color-secondary-black;
+    border-radius: $border-radius-lg;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    border: 1px solid rgba($color-gold, 0.2);
+    box-shadow: 0 20px 60px rgba($color-primary-black, 0.8);
+
+    // Custom scrollbar
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba($color-anthracite, 0.3);
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba($color-gold, 0.5);
+      border-radius: 4px;
+
+      &:hover {
+        background: rgba($color-gold, 0.7);
+      }
+    }
+  }
+
+  &__header {
+    position: sticky;
+    top: 0;
+    background: $color-secondary-black;
+    padding: $spacing-xl;
+    border-bottom: 1px solid rgba($color-gold, 0.2);
+    border-radius: $border-radius-lg $border-radius-lg 0 0;
+    z-index: 10;
+
+    h2 {
+      @include heading-primary;
+      font-size: $font-size-2xl;
+      color: $color-gold;
+      margin: 0 0 $spacing-sm 0;
+    }
+  }
+
+  &__date {
+    font-size: $font-size-sm;
+    color: $color-gray-medium;
+    margin: 0;
+    font-style: italic;
+  }
+
+  &__close {
+    position: absolute;
+    top: $spacing-lg;
+    right: $spacing-lg;
+    width: 40px;
+    height: 40px;
+    background: rgba($color-anthracite, 0.5);
+    border: 1px solid rgba($color-gold, 0.3);
+    border-radius: 50%;
+    color: $color-white;
+    cursor: pointer;
+    @include flex-center;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba($color-gold, 0.2);
+      border-color: $color-gold;
+      transform: scale(1.1);
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &__body {
+    padding: 0 $spacing-xl $spacing-xl;
+
+    section {
+      margin-bottom: $spacing-2xl;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      h3 {
+        @include heading-primary;
+        font-size: $font-size-xl;
+        color: $color-gold;
+        margin: 0 0 $spacing-lg 0;
+        padding-bottom: $spacing-sm;
+        border-bottom: 1px solid rgba($color-gold, 0.3);
+      }
+
+      h4 {
+        @include heading-primary;
+        font-size: $font-size-lg;
+        color: $color-gold-light;
+        margin: $spacing-lg 0 $spacing-md 0;
+      }
+
+      p {
+        @include text-body;
+        color: $color-white;
+        margin: 0 0 $spacing-md 0;
+        line-height: $line-height-relaxed;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        strong {
+          color: $color-gold-light;
+          font-weight: $font-weight-semibold;
+        }
+      }
+
+      ul {
+        margin: $spacing-md 0;
+        padding-left: $spacing-lg;
+
+        li {
+          @include text-body;
+          color: $color-white;
+          margin-bottom: $spacing-sm;
+          line-height: $line-height-relaxed;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
+  &__health-warning {
+    background: rgba($color-red-accent, 0.1);
+    border: 1px solid rgba($color-red-accent, 0.3);
+    border-radius: $border-radius-base;
+    padding: $spacing-lg !important;
+
+    h3 {
+      color: $color-red-accent !important;
+      border-bottom-color: rgba($color-red-accent, 0.3) !important;
+    }
+
+    p {
+      color: $color-white-soft !important;
+    }
+  }
+
+  &__summary {
+    background: rgba($color-gold, 0.1);
+    border: 1px solid rgba($color-gold, 0.3);
+    border-radius: $border-radius-base;
+    padding: $spacing-lg !important;
+
+    h3 {
+      color: $color-gold !important;
+      border-bottom-color: rgba($color-gold, 0.3) !important;
+    }
+
+    ul {
+      margin: $spacing-md 0 0 0 !important;
+    }
+
+    li {
+      color: $color-white-soft !important;
+      margin-bottom: $spacing-sm !important;
+
+      strong {
+        color: $color-gold-light !important;
+      }
+    }
+  }
+
+  // Privacy table styles
+  .privacy-table {
+    margin: $spacing-lg 0;
+    border: 1px solid rgba($color-gold, 0.3);
+    border-radius: $border-radius-base;
+    overflow: hidden;
+
+    &__row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      
+      &:not(:last-child) {
+        border-bottom: 1px solid rgba($color-gold, 0.2);
+      }
+
+      &.privacy-table__header {
+        background: rgba($color-gold, 0.1);
+      }
+    }
+
+    &__cell {
+      padding: $spacing-sm $spacing-md;
+      font-size: $font-size-sm;
+      color: $color-white;
+      border-right: 1px solid rgba($color-gold, 0.2);
+
+      &:last-child {
+        border-right: none;
+      }
+
+      strong {
+        color: $color-gold-light;
+      }
+    }
+
+    // Responsive table
+    @media (max-width: #{$breakpoint-md - 1px}) {
+      &__row {
+        grid-template-columns: 1fr;
+      }
+
+      &__cell {
+        border-right: none;
+        border-bottom: 1px solid rgba($color-gold, 0.1);
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  // Responsive
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    padding: $spacing-md;
+
+    &__content {
+      max-height: 95vh;
+    }
+
+    &__header {
+      padding: $spacing-lg;
+
+      h2 {
+        font-size: $font-size-xl;
+      }
+    }
+
+    &__close {
+      top: $spacing-md;
+      right: $spacing-md;
+      width: 36px;
+      height: 36px;
+
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    &__body {
+      padding: 0 $spacing-lg $spacing-lg;
+
+      section {
+        margin-bottom: $spacing-xl;
+
+        h3 {
+          font-size: $font-size-lg;
+        }
+
+        h4 {
+          font-size: $font-size-base;
+        }
+
+        p {
+          font-size: $font-size-sm;
+        }
+      }
+    }
+  }
+
+  @media (max-width: #{$breakpoint-sm - 1px}) {
+    padding: $spacing-sm;
+
+    &__header {
+      padding: $spacing-md;
+    }
+
+    &__body {
+      padding: 0 $spacing-md $spacing-md;
+    }
+  }
+}

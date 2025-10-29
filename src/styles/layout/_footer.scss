@@ -1,0 +1,135 @@
+// ===================================
+// PREMIUM CROSSFIT COACH - FOOTER
+// ===================================
+
+.footer {
+  background: $gradient-dark;
+  border-top: 1px solid rgba($color-white, 0.1);
+  padding: $spacing-4xl 0 $spacing-xl;
+  
+  .container {
+    @include flex-column;
+    align-items: center;
+    text-align: center;
+    gap: $spacing-2xl;
+  }
+}
+
+.footer-logo {
+  @include flex-center;
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-bold;
+  color: $color-white;
+  text-decoration: none;
+  margin-bottom: $spacing-md;
+  transition: all $transition-base;
+  
+  &:hover {
+    @include text-gradient;
+    transform: scale(1.05);
+  }
+  
+  img,
+  &__image {
+    height: 42px;
+    width: auto;
+    object-fit: contain;
+    transition: all $transition-base;
+  }
+  
+  &:hover img,
+  &:hover &__image {
+    filter: brightness(1.1);
+  }
+}
+
+.footer-tagline {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  color: $color-gold;
+  font-style: italic;
+  margin-bottom: $spacing-xl;
+}
+
+.footer-social {
+  @include flex-center;
+  gap: $spacing-lg;
+  margin-bottom: $spacing-xl;
+  
+  &__link {
+    @include flex-center;
+    width: 48px;
+    height: 48px;
+    background: rgba($color-white, 0.1);
+    border-radius: $border-radius-full;
+    color: $color-white;
+    text-decoration: none;
+    transition: all $transition-base;
+    
+    &:hover {
+      background: $color-gold;
+      color: $color-primary-black;
+      transform: translateY(-2px);
+      box-shadow: $glow-gold;
+    }
+    
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.footer-nav {
+  @include flex-center;
+  gap: $spacing-xl;
+  margin-bottom: $spacing-xl;
+  flex-wrap: wrap;
+  
+  &__link {
+    color: rgba($color-white, 0.7);
+    text-decoration: none;
+    font-weight: $font-weight-medium;
+    transition: color $transition-fast;
+    
+    &:hover {
+      color: $color-gold;
+    }
+  }
+}
+
+.footer-legal {
+  @include flex-center;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+
+  &__link {
+    color: $color-gray-medium;
+    text-decoration: none;
+    font-size: $font-size-sm;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: rgba($color-white, 0.8);
+    }
+  }
+
+  &__button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+  }
+  
+  &__separator {
+    color: rgba($color-white, 0.3);
+  }
+}
+
+.footer-copyright {
+  font-size: $font-size-sm;
+  color: rgba($color-white, 0.5);
+  margin-top: $spacing-lg;
+}

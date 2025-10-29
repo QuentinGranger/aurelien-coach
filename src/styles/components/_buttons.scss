@@ -1,0 +1,236 @@
+// ===================================
+// PREMIUM CROSSFIT COACH - BUTTONS
+// ===================================
+
+@use "sass:color";
+
+// Base button styles
+.btn {
+  @include button-base;
+  padding: $spacing-md $spacing-xl;
+  font-size: $font-size-base;
+  min-height: $button-height-base;
+  
+  // Sizes
+  &--sm {
+    padding: $spacing-sm $spacing-lg;
+    font-size: $font-size-sm;
+    min-height: $button-height-sm;
+  }
+  
+  &--lg {
+    padding: $spacing-lg $spacing-2xl;
+    font-size: $font-size-lg;
+    min-height: $button-height-lg;
+  }
+  
+  &--xl {
+    padding: $spacing-xl $spacing-3xl;
+    font-size: $font-size-xl;
+    min-height: $button-height-xl;
+  }
+  
+  // Variants
+  &--primary {
+    @include button-primary;
+  }
+  
+  &--secondary {
+    @include button-secondary;
+  }
+  
+  &--ghost {
+    @include button-ghost;
+  }
+  
+  // Special variants
+  &--gradient {
+    background: $gradient-gold;
+    color: $color-primary-black;
+    border: none;
+    
+    &:hover {
+      background: linear-gradient(135deg, color.adjust($color-gold, $lightness: 10%) 0%, color.adjust($color-copper, $lightness: 10%) 100%);
+      transform: translateY(-2px);
+      box-shadow: $shadow-xl, $glow-gold;
+    }
+  }
+  
+  &--outline-gold {
+    background: transparent;
+    color: $color-gold;
+    border: 2px solid $color-gold;
+    
+    &:hover {
+      background: $color-gold;
+      color: $color-primary-black;
+      box-shadow: $glow-gold;
+    }
+  }
+  
+  &--glass {
+    background: rgba($color-white, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba($color-white, 0.2);
+    color: $color-white;
+    
+    &:hover {
+      background: rgba($color-white, 0.2);
+      border-color: rgba($color-gold, 0.5);
+      box-shadow: $glow-white;
+    }
+  }
+  
+  // States
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  &--loading {
+    position: relative;
+    color: transparent;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      margin: -10px 0 0 -10px;
+      border: 2px solid transparent;
+      border-top: 2px solid currentColor;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+  }
+  
+  // Full width
+  &--full {
+    width: 100%;
+  }
+  
+  // Icon buttons
+  &--icon {
+    @include flex-center;
+    width: $button-height-base;
+    height: $button-height-base;
+    padding: 0;
+    border-radius: $border-radius-full;
+    
+    &.btn--sm {
+      width: $button-height-sm;
+      height: $button-height-sm;
+    }
+    
+    &.btn--lg {
+      width: $button-height-lg;
+      height: $button-height-lg;
+    }
+    
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+// Button groups
+.btn-group {
+  @include flex-center;
+  gap: $spacing-md;
+  
+  &--vertical {
+    flex-direction: column;
+  }
+  
+  &--full {
+    width: 100%;
+    
+    .btn {
+      flex: 1;
+    }
+  }
+}
+
+// Floating Action Button - Minimalist Design
+.fab {
+  position: fixed;
+  bottom: $spacing-xl;
+  right: $spacing-xl;
+  width: 44px;
+  height: 44px;
+  @include flex-center;
+  background: rgba($color-white, 0.1);
+  color: $color-white;
+  border: 1px solid rgba($color-white, 0.2);
+  border-radius: $border-radius-full;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba($color-primary-black, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: $z-index-fixed;
+  
+  &:hover {
+    background: rgba($color-white, 0.15);
+    border-color: rgba($color-gold, 0.4);
+    color: $color-gold;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba($color-primary-black, 0.4);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  svg {
+    width: 18px;
+    height: 18px;
+    transition: all 0.3s ease;
+  }
+
+  // Mobile adjustments
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    bottom: $spacing-lg;
+    right: $spacing-lg;
+    width: 40px;
+    height: 40px;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+// Animations
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// CTA specific styles
+.cta-button {
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+  
+  &:hover::before {
+    left: 100%;
+  }
+}
