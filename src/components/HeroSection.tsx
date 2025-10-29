@@ -13,7 +13,7 @@ const HeroSection = () => {
           playsInline
           poster="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80"
         >
-          <source src="/videos/video-header.mp4" type="video/mp4" />
+          <source src="/videos/video-dent-tête.mp4" type="video/mp4" />
         </video>
       </div>
 

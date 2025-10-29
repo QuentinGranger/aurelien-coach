@@ -156,7 +156,7 @@ export const optimizePerformance = () => {
     const criticalResources = [
       '/images/LogoAurelien-v2.png',
       '/images/PhotoAurelien.png',
-      '/videos/video-header.mp4',
+      '/videos/video-dent-tête.mp4',
     ];
 
     criticalResources.forEach((resource) => {
