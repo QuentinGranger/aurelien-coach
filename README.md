@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🏋️ Site Aurélien Coach - Elite CrossFit Training
 
 Site web premium pour coach CrossFit développé avec Next.js, TypeScript et SCSS. Design haut de gamme inspiré des marques fitness d'élite comme Nike Training Club et Rogue.
@@ -147,3 +148,7 @@ Pour toute question ou personnalisation, contactez le développeur.
 ---
 
 **"Forgé par l'effort. Guidé par la performance."** ⚡
+=======
+# aurelien-coach
+Site vitrine Next.js hébergé sur Vercel pour le coach sportif Aurélien Mazel – design moderne, performance, SEO et responsive.
+>>>>>>> 71ec8f76d4dbfb1b446e33580a4ac80958f08f6a
