@@ -27,14 +27,26 @@
 
 // Container
 // ===================================
-@mixin container($max-width: $container-xl) {
+@mixin container($max-width: $container-base) {
   width: 100%;
   max-width: $max-width;
   margin: 0 auto;
-  padding: 0 $spacing-md;
+  padding: 0 $spacing-lg;
+  box-sizing: border-box;
+  
+  @include respond-to(md) {
+    padding: 0 $spacing-lg;
+  }
   
   @include respond-to(sm) {
-    padding: 0 $spacing-lg;
+    padding: 0 $spacing-md;
+  }
+  
+  // Extra safety for mobile
+  @media (max-width: 480px) {
+    padding: 0 $spacing-sm;
+    margin: 0;
+    width: 100%;
   }
   
   @include respond-to(lg) {

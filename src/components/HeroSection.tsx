@@ -17,33 +17,44 @@ const HeroSection = () => {
     checkMobile();
     window.addEventListener('resize', checkMobile);
 
-    // Force video play on mobile with user interaction
-    const handleFirstInteraction = () => {
-      if (videoRef.current && isMobile) {
-        videoRef.current.play().catch(console.log);
-      }
-    };
-
-    // Try to play video after load
-    const handleVideoLoad = () => {
-      setVideoLoaded(true);
+    // Force video play immediately on load
+    const forceVideoPlay = async () => {
       if (videoRef.current) {
-        videoRef.current.play().catch(() => {
-          // Fallback: show poster on autoplay failure
-          console.log('Autoplay prevented, showing poster');
-        });
+        try {
+          // Set video properties for better mobile compatibility
+          videoRef.current.muted = true;
+          videoRef.current.playsInline = true;
+          
+          // Force play with multiple attempts
+          await videoRef.current.play();
+          setVideoLoaded(true);
+        } catch (error) {
+          console.log('Autoplay attempt failed, will retry on interaction');
+          
+          // Retry on any user interaction
+          const retryPlay = async () => {
+            try {
+              await videoRef.current?.play();
+              setVideoLoaded(true);
+            } catch (e) {
+              console.log('Manual play failed');
+            }
+          };
+
+          document.addEventListener('touchstart', retryPlay, { once: true });
+          document.addEventListener('click', retryPlay, { once: true });
+        }
       }
     };
 
-    document.addEventListener('touchstart', handleFirstInteraction, { once: true });
-    document.addEventListener('click', handleFirstInteraction, { once: true });
+    // Small delay to ensure video is loaded
+    const timer = setTimeout(forceVideoPlay, 100);
 
     return () => {
       window.removeEventListener('resize', checkMobile);
-      document.removeEventListener('touchstart', handleFirstInteraction);
-      document.removeEventListener('click', handleFirstInteraction);
+      clearTimeout(timer);
     };
-  }, [isMobile]);
+  }, []);
 
   return (
     <section className="hero">
@@ -68,14 +79,19 @@ const HeroSection = () => {
           Votre navigateur ne supporte pas les vidéos HTML5.
         </video>
         
-        {/* Mobile play button overlay */}
-        {isMobile && !videoLoaded && (
+        {/* Fallback: show play button only if video really fails to load */}
+        {!videoLoaded && (
           <div className="hero__play-overlay">
             <button 
               className="hero__play-button"
-              onClick={() => {
+              onClick={async () => {
                 if (videoRef.current) {
-                  videoRef.current.play();
+                  try {
+                    await videoRef.current.play();
+                    setVideoLoaded(true);
+                  } catch (e) {
+                    console.log('Manual play failed');
+                  }
                 }
               }}
               aria-label="Lancer la vidéo"

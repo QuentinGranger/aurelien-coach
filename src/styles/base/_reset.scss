@@ -43,6 +43,20 @@ body {
   color: $color-white;
   background-color: $color-primary-black;
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+// Prevent horizontal scroll on all elements
+* {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+// Ensure no element causes horizontal overflow
+html, body {
+  width: 100%;
+  overflow-x: hidden;
 }
 
 // Remove default styling
