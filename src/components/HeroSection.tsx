@@ -1,20 +1,91 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 
 const HeroSection = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
+  useEffect(() => {
+    // Detect mobile device
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    // Force video play on mobile with user interaction
+    const handleFirstInteraction = () => {
+      if (videoRef.current && isMobile) {
+        videoRef.current.play().catch(console.log);
+      }
+    };
+
+    // Try to play video after load
+    const handleVideoLoad = () => {
+      setVideoLoaded(true);
+      if (videoRef.current) {
+        videoRef.current.play().catch(() => {
+          // Fallback: show poster on autoplay failure
+          console.log('Autoplay prevented, showing poster');
+        });
+      }
+    };
+
+    document.addEventListener('touchstart', handleFirstInteraction, { once: true });
+    document.addEventListener('click', handleFirstInteraction, { once: true });
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      document.removeEventListener('touchstart', handleFirstInteraction);
+      document.removeEventListener('click', handleFirstInteraction);
+    };
+  }, [isMobile]);
+
   return (
     <section className="hero">
       <div className="hero__background">
         <video
+          ref={videoRef}
           autoPlay
           muted
           loop
           playsInline
-          poster="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80"
+          preload={isMobile ? "metadata" : "auto"}
+          poster="/images/PhotoAurelien.png"
+          onLoadedData={() => setVideoLoaded(true)}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
         >
           <source src="/videos/video-dent-tête.mp4" type="video/mp4" />
+          {/* Fallback for very old browsers */}
+          Votre navigateur ne supporte pas les vidéos HTML5.
         </video>
+        
+        {/* Mobile play button overlay */}
+        {isMobile && !videoLoaded && (
+          <div className="hero__play-overlay">
+            <button 
+              className="hero__play-button"
+              onClick={() => {
+                if (videoRef.current) {
+                  videoRef.current.play();
+                }
+              }}
+              aria-label="Lancer la vidéo"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="hero__content">
