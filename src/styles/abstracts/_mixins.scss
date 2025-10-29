@@ -27,7 +27,7 @@
 
 // Container
 // ===================================
-@mixin container($max-width: $container-base) {
+@mixin container($max-width: $container-lg) {
   width: 100%;
   max-width: $max-width;
   margin: 0 auto;
