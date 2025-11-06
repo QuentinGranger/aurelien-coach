@@ -85,9 +85,10 @@ const Footer = () => {
           </button>
         </div>
 
-        <p className="footer-copyright">
-          © {new Date().getFullYear()} Aurélien Coach. Tous droits réservés.
-        </p>
+        <div className="footer__bottom">
+          <p>&copy; {new Date().getFullYear()} Aurélien MAZEL - Coach CrossFit. Tous droits réservés.</p>
+          <a href="/admin" className="admin-link" title="Administration">Admin</a>
+        </div>
       </div>
 
       <LegalModal 

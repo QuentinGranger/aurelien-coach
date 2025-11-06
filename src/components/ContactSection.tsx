@@ -2,8 +2,10 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useContacts } from '@/contexts/ContactsContext';
 
 const ContactSection = () => {
+  const { addContact } = useContacts();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,6 +16,7 @@ const ContactSection = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -27,21 +30,49 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    console.log('Form submitted:', formData);
-    setIsSubmitting(false);
-    
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      objective: '',
-      experience: '',
-      message: ''
-    });
+    try {
+      // Simulate form submission delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Déterminer la priorité basée sur l'objectif
+      let priority: 'low' | 'medium' | 'high' = 'medium';
+      if (formData.objective === 'competition') priority = 'high';
+      if (formData.objective === 'remise-forme') priority = 'low';
+      
+      // Ajouter le contact au contexte
+      addContact({
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim() || undefined,
+        objective: formData.objective || undefined,
+        experience: formData.experience || undefined,
+        message: formData.message.trim() || undefined,
+        status: 'new',
+        priority,
+        source: 'contact-section'
+      });
+      
+      // Afficher le message de succès
+      setShowSuccess(true);
+      
+      // Reset form après un délai
+      setTimeout(() => {
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          objective: '',
+          experience: '',
+          message: ''
+        });
+        setShowSuccess(false);
+        setIsSubmitting(false);
+      }, 3000);
+      
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi du formulaire:', error);
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -260,13 +291,25 @@ const ContactSection = () => {
               </div>
 
               <div className="form-actions form-actions--center">
-                <button
-                  type="submit"
-                  className={`btn btn--primary btn--lg btn--full ${isSubmitting ? 'btn--loading' : ''}`}
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Envoi en cours...' : 'Réserver ma séance test'}
-                </button>
+                {showSuccess ? (
+                  <div className="form-success">
+                    <div className="form-success__icon">
+                      <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                      </svg>
+                    </div>
+                    <h4>Message envoyé !</h4>
+                    <p>Merci pour votre demande. Aurélien vous contactera dans les plus brefs délais.</p>
+                  </div>
+                ) : (
+                  <button
+                    type="submit"
+                    className={`btn btn--primary btn--lg btn--full ${isSubmitting ? 'btn--loading' : ''}`}
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Envoi en cours...' : 'Réserver ma séance test'}
+                  </button>
+                )}
               </div>
             </form>
           </motion.div>

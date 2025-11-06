@@ -122,9 +122,31 @@
     font-family: inherit;
     font-size: inherit;
   }
-  
-  &__separator {
-    color: rgba($color-white, 0.3);
+
+  &__bottom {
+    @include flex-between;
+    align-items: center;
+    padding-top: $spacing-lg;
+    border-top: 1px solid rgba($color-white, 0.1);
+    color: rgba($color-white, 0.6);
+    font-size: $font-size-sm;
+    
+    @include respond-to(sm) {
+      flex-direction: column;
+      gap: $spacing-sm;
+      text-align: center;
+    }
+    
+    .admin-link {
+      opacity: 0.3;
+      font-size: $font-size-sm;
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+      
+      &:hover {
+        opacity: 0.8;
+      }
+    }
   }
 }
 

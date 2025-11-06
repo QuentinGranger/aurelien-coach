@@ -3,8 +3,12 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import ContactModal from './ContactModal';
+import { usePrograms } from '@/contexts/ProgramsContext';
 
 const ProgramsSection = () => {
+  const { getActivePrograms } = usePrograms();
+  const programs = getActivePrograms();
+  
   const [selectedProgram, setSelectedProgram] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProgramForModal, setSelectedProgramForModal] = useState<string>('');
@@ -25,69 +29,6 @@ const ProgramsSection = () => {
       setSelectedProgram(null);
     }
   };
-
-  const programs = [
-    {
-      title: "Découverte CrossFit",
-      description: "Parfait pour débuter ! Apprenez les mouvements de base dans un environnement bienveillant et progressez à votre rythme.",
-      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      duration: "4 semaines",
-      level: "Débutant·e",
-      sessions: "2-3 séances/semaine",
-      results: "Apprentissage des bases, gain de confiance, amélioration de la condition physique",
-      details: [
-        "Mouvements adaptés à votre niveau",
-        "Technique avant tout",
-        "Groupe de débutant·e·s",
-        "Suivi personnalisé inclus"
-      ]
-    },
-    {
-      title: "Fitness Adapté",
-      description: "Programme inclusif conçu pour toutes les morphologies et tous les âges. Chacun·e progresse selon ses capacités.",
-      image: "https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      duration: "8 semaines",
-      level: "Tous niveaux",
-      sessions: "2-4 séances/semaine",
-      results: "Amélioration de la santé générale, renforcement musculaire, bien-être",
-      details: [
-        "Exercices adaptables à chaque personne",
-        "Respect du rythme individuel",
-        "Focus sur le plaisir de bouger",
-        "Communauté bienveillante"
-      ]
-    },
-    {
-      title: "Remise en Forme",
-      description: "Retrouvez votre forme physique en douceur. Programme progressif pour reprendre une activité sportive sereinement.",
-      image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      duration: "6 semaines",
-      level: "Débutant·e à Intermédiaire",
-      sessions: "2-3 séances/semaine",
-      results: "Retour progressif à l'activité, renforcement, amélioration de l'endurance",
-      details: [
-        "Progression douce et sécurisée",
-        "Travail de mobilité intégré",
-        "Écoute de votre corps",
-        "Objectifs réalistes et atteignables"
-      ]
-    },
-    {
-      title: "Coaching Personnalisé",
-      description: "Accompagnement individuel adapté à vos objectifs personnels, quel que soit votre niveau de départ.",
-      image: "https://images.unsplash.com/photo-1549476464-37392f717541?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      duration: "Programme sur-mesure",
-      level: "Tous niveaux",
-      sessions: "Selon vos disponibilités",
-      results: "Atteinte de vos objectifs personnels, confiance en soi, bien-être",
-      details: [
-        "Évaluation de vos besoins",
-        "Programme 100% adapté à vous",
-        "Flexibilité des horaires",
-        "Suivi bienveillant et motivant"
-      ]
-    }
-  ];
 
   return (
     <section id="programs" className="programs">
@@ -110,7 +51,7 @@ const ProgramsSection = () => {
         <div className="programs__grid" onClick={handleBackdropClick}>
           {programs.map((program, index) => (
             <motion.div
-              key={program.title}
+              key={program.id}
               className={`program-card ${selectedProgram === index ? 'expanded' : ''}`}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -119,11 +60,11 @@ const ProgramsSection = () => {
               onClick={() => setSelectedProgram(selectedProgram === index ? null : index)}
             >
               <div className="program-card__image">
-                <img src={program.image} alt={program.title} />
+                <img src={program.image} alt={program.name} />
               </div>
               
               <div className="program-card__content">
-                <h3 className="program-card__title">{program.title}</h3>
+                <h3 className="program-card__title">{program.name}</h3>
                 <p className="program-card__description">{program.description}</p>
                 
                 <div className="program-card__meta">
@@ -172,7 +113,7 @@ const ProgramsSection = () => {
                     className="program-card__cta btn btn--primary"
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleOpenModal(program.title);
+                      handleOpenModal(program.name);
                     }}
                   >
                     Je me lance !

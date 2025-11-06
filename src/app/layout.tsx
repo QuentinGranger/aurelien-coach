@@ -4,6 +4,9 @@ import { defaultMetadata } from "@/lib/metadata";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import StructuredData from "@/components/StructuredData";
 import SEOContent, { SEOBreadcrumbs } from "@/components/SEOContent";
+import { ProgramsProvider } from '@/contexts/ProgramsContext';
+import { ReviewsProvider } from '@/contexts/ReviewsContext';
+import { ContactsProvider } from '@/contexts/ContactsContext';
 import "../styles/globals.scss";
 
 const inter = Inter({
@@ -30,10 +33,16 @@ export default function RootLayout({
         <SEOBreadcrumbs />
       </head>
       <body className={inter.variable}>
-        <SmoothScrollProvider>
-          {children}
-          <SEOContent />
-        </SmoothScrollProvider>
+        <ProgramsProvider>
+          <ReviewsProvider>
+            <ContactsProvider>
+              <SmoothScrollProvider>
+                {children}
+                <SEOContent />
+              </SmoothScrollProvider>
+            </ContactsProvider>
+          </ReviewsProvider>
+        </ProgramsProvider>
       </body>
     </html>
   );

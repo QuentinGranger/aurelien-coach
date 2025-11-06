@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
+import { useContacts } from '@/contexts/ContactsContext';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -10,6 +11,7 @@ interface ContactModalProps {
 }
 
 const ContactModal = ({ isOpen, onClose, selectedProgram }: ContactModalProps) => {
+  const { addContact } = useContacts();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,12 +19,55 @@ const ContactModal = ({ isOpen, onClose, selectedProgram }: ContactModalProps) =
     message: '',
     program: selectedProgram || ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Ici vous pouvez ajouter la logique d'envoi du formulaire
-    console.log('Form submitted:', formData);
-    onClose();
+    setIsSubmitting(true);
+    
+    try {
+      // Simulate form submission delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Déterminer la priorité basée sur le programme
+      let priority: 'low' | 'medium' | 'high' = 'medium';
+      if (formData.program === 'Coaching Personnalisé') priority = 'high';
+      if (formData.program === 'Découverte CrossFit') priority = 'low';
+      
+      // Ajouter le contact au contexte
+      addContact({
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim() || undefined,
+        program: formData.program || undefined,
+        message: formData.message.trim() || undefined,
+        status: 'new',
+        priority,
+        source: 'contact-modal'
+      });
+      
+      // Afficher le succès
+      setShowSuccess(true);
+      
+      // Fermer la modal après un délai
+      setTimeout(() => {
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          message: '',
+          program: selectedProgram || ''
+        });
+        setShowSuccess(false);
+        setIsSubmitting(false);
+        onClose();
+      }, 2000);
+      
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi du formulaire:', error);
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -133,12 +178,30 @@ const ContactModal = ({ isOpen, onClose, selectedProgram }: ContactModalProps) =
                 </div>
 
                 <div className="modal__actions">
-                  <button type="button" className="btn btn--secondary" onClick={onClose}>
-                    Annuler
-                  </button>
-                  <button type="submit" className="btn btn--primary">
-                    Envoyer ma demande
-                  </button>
+                  {showSuccess ? (
+                    <div className="modal__success">
+                      <div className="success-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
+                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                      </div>
+                      <h4>Demande envoyée !</h4>
+                      <p>Aurélien vous contactera rapidement.</p>
+                    </div>
+                  ) : (
+                    <>
+                      <button type="button" className="btn btn--secondary" onClick={onClose}>
+                        Annuler
+                      </button>
+                      <button 
+                        type="submit" 
+                        className={`btn btn--primary ${isSubmitting ? 'btn--loading' : ''}`}
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? 'Envoi...' : 'Envoyer ma demande'}
+                      </button>
+                    </>
+                  )}
                 </div>
               </form>
             </motion.div>

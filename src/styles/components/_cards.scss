@@ -366,29 +366,110 @@
   }
   
   &__metrics {
-    @include flex-center;
+    display: flex;
     gap: $spacing-lg;
-    margin-top: $spacing-lg;
-    padding-top: $spacing-lg;
-    border-top: 1px solid rgba($color-white, 0.1);
+    justify-content: center;
+    margin-top: $spacing-xl;
+    flex-wrap: wrap;
   }
-  
+
   &__metric {
     text-align: center;
     
     &-value {
       display: block;
-      font-size: $font-size-lg;
+      font-size: $font-size-xl;
       font-weight: $font-weight-bold;
       color: $color-gold;
+      line-height: 1.2;
     }
     
     &-label {
-      font-size: $font-size-xs;
-      color: rgba($color-white, 0.6);
+      font-size: $font-size-sm;
+      color: rgba($color-white, 0.7);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.5px;
+      margin-top: $spacing-xs;
     }
+  }
+
+}
+
+// Section CTA pour laisser un avis (entre carte et navigation)
+.results__cta {
+  text-align: center;
+  margin: $spacing-2xl 0 $spacing-xl 0;
+}
+
+// Bouton CTA pour laisser un avis
+.testimonial-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-size: $font-size-base;
+  padding: $spacing-lg $spacing-2xl;
+  background: linear-gradient(135deg, $color-gold 0%, darken($color-gold, 8%) 100%);
+  border: 2px solid transparent;
+  color: $color-primary-black;
+  font-weight: $font-weight-bold;
+  border-radius: $border-radius-lg;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: none;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba($color-gold, 0.2);
+
+  // Effet de brillance
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(white, 0.3), transparent);
+    transition: left 0.6s ease;
+  }
+
+  svg {
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 1px 2px rgba($color-primary-black, 0.2));
+  }
+
+  &:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 35px rgba($color-gold, 0.4);
+    background: linear-gradient(135deg, lighten($color-gold, 8%) 0%, $color-gold 100%);
+    border-color: rgba(white, 0.3);
+
+    &::before {
+      left: 100%;
+    }
+
+    svg {
+      transform: scale(1.1) rotate(5deg);
+    }
+  }
+
+  &:active {
+    transform: translateY(-1px) scale(1.01);
+    box-shadow: 0 6px 20px rgba($color-gold, 0.3);
+  }
+
+  // Animation de pulsation subtile
+  &:focus {
+    outline: none;
+    animation: pulse-gold 2s infinite;
+  }
+}
+
+@keyframes pulse-gold {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba($color-gold, 0.2);
+  }
+  50% {
+    box-shadow: 0 4px 25px rgba($color-gold, 0.4);
   }
 }
 
